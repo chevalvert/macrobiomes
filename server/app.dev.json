@@ -1,0 +1,46 @@
+{
+  "title": "Macrobiomes",
+  "lang": "fr-FR",
+  "theme": "#000000",
+
+  "remoteWebSocketServer": "ws://localhost:8080",
+  "ticksBeforeRefresh": 20000,
+  "ghostRemote": false,
+
+  "renderer": {
+    "fps": 30,
+    "scale": 3,
+    "padding": 30
+  },
+
+  "gamepad": {
+    "mapping": {
+      "clear": "DPad-Down",
+      "random": "DPad-Right",
+      "send": "DPad-Left"
+    },
+    "debug": {
+      "s": "DPad-Up",
+      "c": "DPad-Down",
+      "r": "DPad-Right",
+      "Enter": "DPad-Left"
+    }
+  },
+
+  "scene": {
+    "invert": false,
+    "displayNewCreature": 5000,
+    "patterns": [
+      "R-",
+      "R-RT",
+      "11-22T--3344---55--"
+    ],
+    "palettes": [
+      ["#5181c9", "#49b094", "#5da3d3", "#2b6c4b", "#b79497", "#5b8cde"]
+    ]
+  },
+
+  "population": {
+    "maxLength": 10
+  }
+}
