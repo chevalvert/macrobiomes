@@ -4,7 +4,6 @@ const Store = {
   renderer: {
     instance: undefined, // Will be set by <App> when mounted
     debug: localStored(false, 'debug'),
-    angle: writable(0),
 
     layers: readable({
       trace: {
@@ -34,30 +33,32 @@ const Store = {
   // Public store for the Population controller
   population: {
     maxLength: readable(window.ENV.population.maxLength),
+    initialTypeDistribution: readable(window.ENV.population.initialTypeDistribution),
+    initialSizeDistribution: readable(window.ENV.population.initialSizeDistribution),
     content: writable([])
   },
 
   creatures: {
     types: readable({
-      champignon: 'Builder',
-      bactérie: 'Shifter',
-      virus: 'Restorer'
+      builder: 'Builder',
+      shifter: 'Shifter',
+      restorer: 'Restorer'
     }),
     behaviors: readable({
-      bactérie: {
-        'digestive minus': { speed: 1, size: [5, 10, 10, 20, 20] },
-        'défensive mesurée': { speed: 2, size: [30, 50, 50, 60, 70] },
-        'pathogène magnifique': { speed: 4, size: [80, 100, 125] }
+      shifter: {
+        small: { speed: 1, size: [5, 10, 10, 20, 20] },
+        medium: { speed: 2, size: [30, 50, 50, 60, 70] },
+        large: { speed: 4, size: [80, 100, 125] }
       },
-      virus: {
-        'dormant rabougri': { speed: 1, size: [5, 10, 10, 20, 20] },
-        'messager moyen': { speed: 2, size: [50, 30, 50, 60, 70, 70] },
-        'infectieux ogre': { speed: 4, size: [80, 100, 125] }
+      restorer: {
+        small: { speed: 1, size: [5, 10, 10, 20, 20] },
+        medium: { speed: 2, size: [50, 30, 50, 60, 70, 70] },
+        large: { speed: 4, size: [80, 100, 125] }
       },
-      champignon: {
-        'sédentaire microscopique': { speed: 1, size: [5, 10, 10, 20, 20] },
-        'curieux commun': { speed: 2, size: [50, 30, 50, 60, 70, 70] },
-        'colonisateur mammouth': { speed: 4, size: [80, 100, 125] }
+      builder: {
+        small: { speed: 1, size: [5, 10, 10, 20, 20] },
+        medium: { speed: 2, size: [50, 30, 50, 60, 70, 70] },
+        large: { speed: 4, size: [80, 100, 125] }
       }
     })
   },

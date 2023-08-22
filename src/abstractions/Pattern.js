@@ -43,18 +43,6 @@ export default class Pattern {
     ctx.drawImage(this.canvas, i, j, width, height)
   }
 
-  strip (length = 10) {
-    const pixels = []
-    for (let i = 0; i < length; i++) {
-      let color = this.#getColor(i, 0)
-      if (color === 'white') color = '#ffffff'
-      if (color === 'black') color = '#000000'
-      if (color === 'transparent') color = '#000000'
-      pixels.push(color)
-    }
-    return pixels
-  }
-
   #getColor (i, j) {
     // To avoid discrepencies in same signature pattern on different width
     // canvases, we use a hardcoded cols value

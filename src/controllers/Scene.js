@@ -10,9 +10,6 @@ export function update () {
 
   renderer.clear()
 
-  Store.renderer.angle.update(angle => angle + (window.ENV.renderer.rotationSpeed || 0))
-  renderer.base.style.setProperty('--angle', (Store.renderer.angle.current % 360).toFixed(3) + 'deg')
-
   for (const creature of Store.population.content.get()) {
     creature.update()
     creature.render({

@@ -1,5 +1,4 @@
 import Store from 'store'
-import anime from 'animejs'
 import { Component } from 'utils/jsx'
 import { writable } from 'utils/state'
 
@@ -9,8 +8,6 @@ import WebSocketServer from 'controllers/WebSocketServer'
 
 import Renderer from 'components/Renderer'
 import GamepadMenu from 'components/GamepadMenu'
-
-const ANIMATION = {}
 
 export default class Remote extends Component {
   beforeRender () {
@@ -62,7 +59,6 @@ export default class Remote extends Component {
   }
 
   update () {
-    anime.remove(ANIMATION)
     const [type, behavior] = this.state.gamepadValue.get()
 
     this.state.creature.set(Population.create({
@@ -85,33 +81,12 @@ export default class Remote extends Component {
   }
 
   async handleSend () {
-    anime.remove(ANIMATION)
-    WebSocketServer.send('stripled')
-
     const creature = this.state.creature.get()
     if (!creature) return
-
-    const length = creature.size / 10
-    ANIMATION.pixels = creature.pattern.isEmpty()
-      ? [creature.color]
-      : creature.pattern.strip(length)
-    ANIMATION.offset = -ANIMATION.pixels.length
-
-    // Correct color for LED
-    ANIMATION.pixels = ANIMATION.pixels.map(hex => window.ENV.colorMapping[hex] || hex)
 
     this.refs.renderer.base.style.animation = 'none'
     void this.refs.renderer.base.offsetHeight // eslint-disable-line no-void
     this.refs.renderer.base.style.animation = null
-    await new Promise(resolve => window.setTimeout(resolve, window.ENV.ledAnimationDelay))
-
-    await anime({
-      targets: ANIMATION,
-      offset: 83,
-      easing: 'linear',
-      duration: 2000,
-      update: () => WebSocketServer.send('stripled', ANIMATION)
-    }).finished
 
     WebSocketServer.send('creature', this.state.creature.current.toJSON())
   }

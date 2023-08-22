@@ -1,4 +1,4 @@
-# microbiomes  [<img src="https://github.com/chevalvert.png?size=100" align="right">](http://chevalvert.fr/)
+# macrobiomes  [<img src="https://github.com/chevalvert.png?size=100" align="right">](http://chevalvert.fr/)
 
 <br>
 
@@ -7,8 +7,8 @@
 ### Installation
 
 ```console
-$ git clone https://github.com/chevalvert/microbiomes
-$ cd microbiomes
+$ git clone https://github.com/chevalvert/macrobiomes
+$ cd macrobiomes
 $ yarn install
 $ yarn start
 ```
@@ -18,7 +18,6 @@ $ yarn start
 ```console
 $ yarn start
 $ yarn build
-$ yarn deploy:preprod
 ```
 
 ### Deployment to production using GitHub releases

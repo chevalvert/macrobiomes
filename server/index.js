@@ -2,14 +2,10 @@
 
 const path = require('path')
 const pkg = require('../package.json')
-const sudo = require('sudo-js')
+require('dotenv').config({ path: path.resolve(__dirname, '.env') })
 
-const external = require('./utils/external-file')
-require('dotenv').config({ path: external('.env') })
-
-sudo.setPassword(process.env.SUDO)
 process.env.NODE_ENV = process.env.NODE_ENV || 'production'
-process.env.CONFIGURATION = external(process.env.CONFIGURATION)
+process.env.CONFIGURATION = path.join(__dirname, process.env.CONFIGURATION)
 
 const http = require('http')
 const express = require('express')
@@ -19,7 +15,6 @@ const Websocket = require('./websocket')
 const MemoryStore = require('memorystore')(session)
 const logger = require('./utils/logger')
 const render = require('./api/render')
-const StripLed = require('./api/strip-led')
 
 const app = express()
 const server = http.createServer(app)
@@ -34,8 +29,6 @@ const sessionParser = session({
     maxAge: 365 * 24 * 60 * 60 * 1000
   }
 })
-
-StripLed.connect(process.env.STRIPLED_ADDRESS)
 
 // Log request
 app.use((req, res, next) => {
@@ -78,8 +71,6 @@ app.use(express.static(path.join(__dirname, '..', 'static')))
 
 // Setup API routes
 app.use('/api/ping', (req, res) => res.status(200).json({ version: pkg.version }))
-Websocket.on('stripled', StripLed.set)
-Websocket.on('shutdown', () => sudo.exec(['shutdown', '-u', '-h', 'now']))
 
 // Setup front routes
 app.use(['/screen/:id', '/screen'], render('main.hbs'))

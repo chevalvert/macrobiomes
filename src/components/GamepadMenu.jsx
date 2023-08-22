@@ -27,10 +27,10 @@ export default class Button extends Component {
     this.state.value.subscribe(this.handleValueChange)
     this.handleValueChange()
 
-    Gamepad.on('right', () => this.state.selectedEntryIndex.update(i => clamp(--i, 0, this.refs.entries.length - 1)))
-    Gamepad.on('left', () => this.state.selectedEntryIndex.update(i => clamp(++i, 0, this.refs.entries.length - 1)))
-    Gamepad.on('down', this.handleSubEntryChange(-1))
-    Gamepad.on('up', this.handleSubEntryChange(+1))
+    Gamepad.on('up', () => this.state.selectedEntryIndex.update(i => clamp(--i, 0, this.refs.entries.length - 1)))
+    Gamepad.on('down', () => this.state.selectedEntryIndex.update(i => clamp(++i, 0, this.refs.entries.length - 1)))
+    Gamepad.on('right', this.handleSubEntryChange(-1))
+    Gamepad.on('left', this.handleSubEntryChange(+1))
   }
 
   clear () {
