@@ -1,3 +1,4 @@
+/* global APP */
 import Store from 'store'
 import Emitter from 'tiny-emitter'
 
@@ -18,17 +19,18 @@ function emitDebounced (name) {
 
   events[name].current = true
   if (events[name].current !== events[name].previous) {
-    if (window.ENV.gamepad && window.ENV.gamepad.debug) console.log('[GAMEPAD]', name)
+    if (APP.gamepad?.keyMapping?.debug) console.log('[GAMEPAD]', name)
     emitter.emit(name)
+    emitter.emit('keypress')
   }
 }
 
-if (window.ENV.gamepad.debug) {
+if (APP.gamepad?.keyMapping.debug) {
   window.addEventListener('keydown', e => {
     const arrow = ((e.key.match(/Arrow(.*)/) || [])[1] || '').toLowerCase()
     if (arrow !== '') return emitDebounced(arrow)
 
-    for (const [key, btn] of Object.entries(window.ENV.gamepad.debug || {})) {
+    for (const [key, btn] of Object.entries(APP.gamepad.keyMapping.debug)) {
       if (e.key === key) emitDebounced(btn)
     }
   })

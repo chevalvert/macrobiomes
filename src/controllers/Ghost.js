@@ -1,3 +1,5 @@
+/* global APP */
+
 import Population from 'controllers/Population'
 import { randomInt } from 'missing-math'
 import WebSocketServer from 'controllers/WebSocketServer'
@@ -8,9 +10,18 @@ let isRunning = false
 WebSocketServer.content.subscribe(reset)
 
 function tick () {
-  const next = randomInt(window.ENV.ghostRemote[0], window.ENV.ghostRemote[1])
+  if (!APP.gamepad.ghost) return
+
+  const next = randomInt(APP.gamepad.ghost[0], APP.gamepad.ghost[1])
   timer = window.setTimeout(() => {
-    Population.add(Population.createRandomCreature())
+    const data = {
+      from: 'ghost',
+      creature: Population.createRandomCreature()
+    }
+
+    WebSocketServer.send('creature', data)
+    Population.add(data)
+
     tick()
   }, next)
 }

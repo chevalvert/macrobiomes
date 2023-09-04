@@ -21,9 +21,11 @@ module.exports = template => (req, res, next) => {
     const html = render({
       app: fs.readJSONSync(process.env.CONFIGURATION),
       pkg,
-      id: req.params.id || 0,
-      env: process.env.NODE_ENV,
-      isProduction: process.env.NODE_ENV === 'production'
+      uid: req.params.uid || 0,
+      env: {
+        name: process.env.NODE_ENV,
+        isProduction: process.env.NODE_ENV === 'production'
+      }
     })
 
     res.send(html)

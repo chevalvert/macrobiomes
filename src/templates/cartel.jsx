@@ -1,11 +1,9 @@
 import { render } from 'utils/jsx'
 
-import Remote from 'components/Remote'
+import Cartel from 'components/Cartel'
 
 import Raf from 'controllers/Raf'
-import Sound from 'controllers/Sound'
 import WebSocketServer from 'controllers/WebSocketServer'
-import Gamepad from 'controllers/Gamepad'
 
 /// #if DEVELOPMENT
 require('webpack-hot-middleware/client?reload=true')
@@ -13,14 +11,8 @@ require('webpack-hot-middleware/client?reload=true')
 /// #endif
 
 ;(async () => {
-  render(<Remote />, document.body)
+  render(<Cartel />, document.body)
 
   Raf.start()
   WebSocketServer.open()
-
-  Gamepad.bind()
-  Gamepad.on('keypress', () => {
-    Sound.load()
-    WebSocketServer.send('gamepad:keypress')
-  })
 })()

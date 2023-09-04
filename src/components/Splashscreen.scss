@@ -1,0 +1,16 @@
+.splashscreen {
+  position: fixed;
+  z-index: 3;
+  inset: 0;
+
+  display: grid;
+
+  place-items: center;
+
+  background: var(--background);
+  color: white;
+
+  &__content {
+    font-size: 2rem;
+  }
+}

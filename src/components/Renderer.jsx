@@ -30,6 +30,7 @@ export default class Renderer extends Component {
       <section
         id='Renderer'
         class='renderer'
+        style={`--padding: ${props.padding ?? 0}px`}
       >
         {Object.entries(Store.renderer.layers.current).map(([name]) => (
           <canvas
@@ -48,6 +49,8 @@ export default class Renderer extends Component {
     this.#forEachLayers((canvas, context, { name, resolution, roundTo, style = {} }) => {
       canvas.width = this.props.width * resolution
       canvas.height = this.props.height * resolution
+      canvas.style.width = this.props.width + 'px'
+      canvas.style.height = this.props.height + 'px'
       canvas.resolution = 1 / resolution
 
       for (const [prop, value] of Object.entries(style)) {
@@ -73,10 +76,10 @@ export default class Renderer extends Component {
     Store.renderer.instance = readable(this)
   }
 
-  clear (force = false) {
-    this.#forEachLayers((canvas, context, { clear }) => {
-      if (!clear && !force) return
-      context.clearRect(0, 0, this.props.width, this.props.height)
+  clear ({ force = false } = {}) {
+    this.#forEachLayers((canvas, context, { name, clear }) => {
+      if (!force && !clear) return
+      context.clearRect(0, 0, canvas.width * canvas.resolution, canvas.height * canvas.resolution)
     })
   }
 
@@ -109,10 +112,12 @@ export default class Renderer extends Component {
 
       const { left, top } = el.getBoundingClientRect()
       ctx.fillText(el.innerText, left, top + parseInt(fontSize))
+      ctx.restore()
     })
   }
 
-  debug (position, {
+  shape ({
+    position,
     text = null,
     dimensions = [10, 10],
     strokeStyle = 'black',
@@ -120,7 +125,7 @@ export default class Renderer extends Component {
     lineWidth = null,
     path
   } = {}) {
-    this.draw('debug', ctx => {
+    return ctx => {
       ctx.strokeStyle = strokeStyle
       ctx.fillStyle = fillStyle
       ctx.lineWidth = lineWidth || ctx.canvas.resolution
@@ -151,7 +156,7 @@ export default class Renderer extends Component {
         ctx.fillStyle = 'white'
         ctx.fillText(text, x, y + fontSize - padding / 2)
       }
-    })
+    }
   }
 
   noise (i, j, {
@@ -172,7 +177,7 @@ export default class Renderer extends Component {
     }
   }
 
-  #measureText (text, layerName = 'debug') {
+  #measureText (text, layerName = 'text') {
     const id = layerName + '__' + text
     if (CACHE.has(id)) return CACHE.get(id)
 

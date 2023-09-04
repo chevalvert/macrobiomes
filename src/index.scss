@@ -7,6 +7,7 @@
 
 :root {
   // --theme: defined in app.json
+  --text: white;
   --background: var(--theme);
 }
 
@@ -16,10 +17,12 @@
 
 @import 'components/App';
 @import 'components/Button';
+@import 'components/Cartel';
 @import 'components/GamepadMenu';
 @import 'components/Remote';
 @import 'components/Renderer';
 @import 'components/Select';
+@import 'components/Splashscreen';
 
 html {
   cursor: none;

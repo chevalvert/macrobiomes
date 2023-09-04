@@ -73,8 +73,9 @@ app.use(express.static(path.join(__dirname, '..', 'static')))
 app.use('/api/ping', (req, res) => res.status(200).json({ version: pkg.version }))
 
 // Setup front routes
-app.use(['/screen/:id', '/screen'], render('main.hbs'))
-app.use(['/:id', '/'], render('remote.hbs'))
+app.use(['/cartel/:uid', '/cartel'], render('cartel.hbs'))
+app.use(['/remote/:uid', '/remote'], render('remote.hbs'))
+app.use(['/:uid', '/'], render('main.hbs'))
 
 // Log errors
 app.use((error, req, res, next) => {

@@ -1200,6 +1200,13 @@
   resolved "https://registry.yarnpkg.com/@stroncium/procfs/-/procfs-1.2.1.tgz#6b9be6fd20fb0a4c20e99a8695e083c699bb2b45"
   integrity sha512-X1Iui3FUNZP18EUvysTHxt+Avu2nlVzyf90YM8OYgP6SGzTzzX/0JgObfO1AQQDzuZtNNz29bVh8h5R97JrjxA==
 
+"@tooooools/html-to-svg@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@tooooools/html-to-svg/-/html-to-svg-1.0.0.tgz#430c28ac6f091fc51674822f219b7b116a2fd82f"
+  integrity sha512-zqjbKnj0Reco6wrYlStbPtylb9/+vu+g2Z8fCjMwmy+E83p7LjPcak74YrQka9BoaXZq8n5nBDMDgOD2eejUPg==
+  dependencies:
+    opentype.js "^1.3.4"
+
 "@tootallnate/once@1":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-1.1.2.tgz#ccb91445360179a04e7fe6aff78c00ffc1eeaf82"
@@ -4711,6 +4718,11 @@ hotkeys-js@^3.9.4:
   resolved "https://registry.yarnpkg.com/hotkeys-js/-/hotkeys-js-3.12.0.tgz#5534a7ffdba923df489ffbd876b991979beb2c77"
   integrity sha512-Z+N573ycUKIGwFYS3ID1RzMJiGmtWMGKMiaNLyJS8B1ei+MllF4ZYmKS2T0kMWBktOz+WZLVNikftEgnukOrXg==
 
+howler@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/howler/-/howler-2.2.3.tgz#a2eff9b08b586798e7a2ee17a602a90df28715da"
+  integrity sha512-QM0FFkw0LRX1PR8pNzJVAY25JhIWvbKMBFM4gqk+QdV+kPXOhleWGCB6AiAF/goGjIHK2e/nIElplvjQwhr0jg==
+
 html-comment-regex@^1.1.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/html-comment-regex/-/html-comment-regex-1.1.2.tgz#97d4688aeb5c81886a364faa0cad1dda14d433a7"
@@ -4797,10 +4809,10 @@ humanize-ms@^1.2.1:
   dependencies:
     ms "^2.0.0"
 
-iconoir@^5.3.0:
-  version "5.5.2"
-  resolved "https://registry.yarnpkg.com/iconoir/-/iconoir-5.5.2.tgz#9e3a647075c894323c753a26e9ed7cfb80665962"
-  integrity sha512-198g3lHrs1nMr4FBfJL3cBMl89NhJat342c684JVYJPlPpjFY2RBZAzD/rpAtg8LIOGXzNjcZzIb+IQCfY4Dqw==
+iconoir@^6.11.0:
+  version "6.11.0"
+  resolved "https://registry.yarnpkg.com/iconoir/-/iconoir-6.11.0.tgz#99ed6af7a6d96e137c29cc8d057a8d07c0030490"
+  integrity sha512-68YIHDwpJojMN4Qz0YnaIVzWudcsSLwWc2MmxxvT6r4oL96kCTAuZwQJHv8Z2ZrTCW8acI4dfETmo4X+Q36rfA==
 
 iconv-lite@0.4.24:
   version "0.4.24"
@@ -6634,6 +6646,14 @@ onetime@^5.1.0, onetime@^5.1.2:
   dependencies:
     mimic-fn "^2.1.0"
 
+opentype.js@^1.3.4:
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/opentype.js/-/opentype.js-1.3.4.tgz#1c0e72e46288473cc4a4c6a2dc60fd7fe6020d77"
+  integrity sha512-d2JE9RP/6uagpQAVtJoF0pJJA/fgai89Cc50Yp0EJHk+eLp6QQ7gBoblsnubRULNY132I0J1QKMJ+JTbMqz4sw==
+  dependencies:
+    string.prototype.codepointat "^0.2.1"
+    tiny-inflate "^1.0.3"
+
 optionator@^0.9.1:
   version "0.9.3"
   resolved "https://registry.yarnpkg.com/optionator/-/optionator-0.9.3.tgz#007397d44ed1872fdc6ed31360190f81814e2c64"
@@ -6884,6 +6904,11 @@ performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha512-7EAHlyLHI56VEIdK57uwHdHKIaAGbnXPiw0yWbarQZOKaKpvUIgW0jWRVLiatnM+XXlSwsanIBH/hzGMJulMow==
+
+phonetic@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/phonetic/-/phonetic-0.1.1.tgz#42cf97f15d03b0c99f26d5223590a323699bee2f"
+  integrity sha512-ZEU6L2pDaA1PSFHHQZ2z3wAJW20j0I3xEb4T/FtU8Q8RoH1x/egU+mOqLXCyvy0/VKxDEusXGUEihHOc+7eoEQ==
 
 picocolors@^0.2.1:
   version "0.2.1"
@@ -8631,6 +8656,11 @@ string-width@^2.1.0, string-width@^2.1.1:
     is-fullwidth-code-point "^2.0.0"
     strip-ansi "^4.0.0"
 
+string.prototype.codepointat@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/string.prototype.codepointat/-/string.prototype.codepointat-0.2.1.tgz#004ad44c8afc727527b108cd462b4d971cd469bc"
+  integrity sha512-2cBVCj6I4IOvEnjgO/hWqXjqBGsY+zwPmHl12Srk9IXSZ56Jwwmy+66XO5Iut/oQVR7t5ihYdLB0GMa4alEUcg==
+
 string.prototype.matchall@^4.0.8:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/string.prototype.matchall/-/string.prototype.matchall-4.0.8.tgz#3bf85722021816dcd1bf38bb714915887ca79fd3"
@@ -8999,6 +9029,11 @@ tiny-emitter@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/tiny-emitter/-/tiny-emitter-2.1.0.tgz#1d1a56edfc51c43e863cbb5382a72330e3555423"
   integrity sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q==
+
+tiny-inflate@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/tiny-inflate/-/tiny-inflate-1.0.3.tgz#122715494913a1805166aaf7c93467933eea26c4"
+  integrity sha512-pkY1fj1cKHb2seWDy0B16HeWyczlJA9/WW3u3c4z/NiWDsO3DOU5D7nhTLE9CF0yXv/QZFY7sEJmj24dK+Rrqw==
 
 tmp@^0.0.33:
   version "0.0.33"

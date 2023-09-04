@@ -2,8 +2,36 @@ import { randomOf } from 'controllers/Prng'
 
 const CACHE = new Map()
 
-// TODO: preload all needed patterns at launch to avoid temporary freezes during runtime
+// Helper to preload all patterns at launch, avoiding temporary freezes during runtime
+export function buildCache (ctx, patterns, palettes) {
+  return {
+    target: patterns.length * palettes.length + 1 + Pattern.restorer.patterns.length,
+    generator: (function * () {
+      yield new Pattern(ctx)
+      for (const pattern of patterns) {
+        for (const palette of palettes) {
+          yield new Pattern(ctx, pattern, palette)
+        }
+      }
+
+      for (const pattern of Pattern.restorer.patterns) {
+        yield new Pattern(ctx, pattern, Pattern.restorer.palette)
+      }
+    })()
+  }
+}
+
 export default class Pattern {
+  static get restorer () {
+    return {
+      patterns: ['R', 'RR', 'RRR', 'RRRR'],
+      palette: [
+        ...new Array(90).fill('black'),
+        ...new Array(10).fill('transparent')
+      ]
+    }
+  }
+
   constructor (ctx, string = 'T', colors = []) {
     this.ctx = ctx
 

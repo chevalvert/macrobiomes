@@ -1,7 +1,7 @@
-/* global localStorage */
+/* global PKG, localStorage */
 import { writable } from 'utils/state'
 
-const NS = `${window.ENV.name}@${window.ENV.version}/${window.location.pathname}__`
+const NS = `${PKG.name}@${PKG.version}/${window.location.pathname}__`
 
 const DEFAULTS = {
   encode: JSON.stringify,

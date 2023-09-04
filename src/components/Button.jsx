@@ -38,14 +38,18 @@ export default class Button extends Component {
     this.state.isWaiting.set(true)
     await (this.props['event-click'] || noop)(e)
 
-    // Trigger animation on .button__icon if any
-    this.refs.icon.style.animation = 'none'
-    void this.refs.icon.offsetHeight // eslint-disable-line no-void
-    this.refs.icon.style.animation = null
+    this.animate()
 
     // Testing for mounted before doing anything, because the event-click may
     // cause this component to be destroyed
     if (!this.mounted) return
     this.state.isWaiting.set(false)
+  }
+
+  animate () {
+    // Trigger animation on .button__icon if any
+    this.refs.icon.style.animation = 'none'
+    void this.refs.icon.offsetHeight // eslint-disable-line no-void
+    this.refs.icon.style.animation = null
   }
 }

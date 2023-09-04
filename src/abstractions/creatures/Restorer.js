@@ -14,11 +14,8 @@ export default class Restorer extends Builder {
       this.renderer.getContext('trace'),
       // This is a small trick to exploit the Pattern caching system, allowing
       // multiple caches of the same pattern by defining different redundant patterns
-      randomOf(['R', 'RR', 'RRR', 'RRRR']),
-      [
-        ...new Array(90).fill('black'),
-        ...new Array(10).fill('transparent')
-      ]
+      randomOf(Pattern.restorer.patterns),
+      Pattern.restorer.palette
     )
   }
 }

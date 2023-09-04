@@ -21,6 +21,66 @@ export function randomOf (arr) {
   return arr[Math.floor(randomizer.nextFloat() * arr.length)]
 }
 
+export function randomName () {
+  const base = randomOf([
+    'cam',
+    'pat',
+    'bubu',
+    'nono',
+    'matmo',
+    'chacha',
+    'bobo',
+    'bibi',
+    'baba',
+    'stro',
+    'sta',
+    'stra',
+    'sto',
+    'lama',
+    'lomo',
+    'maxi',
+    'mini',
+    'momo',
+    'mimi',
+    'chichi',
+    'juju',
+    'jojo'
+  ])
+
+  const intermediate = randomOf([
+    'f',
+    'n',
+    'b',
+    't',
+    'l',
+    'll',
+    'st',
+    'cht'
+  ])
+
+  const suffix = randomOf([
+    'yl',
+    'ée',
+    'ae',
+    'us',
+    'um',
+    'em',
+    'ium',
+    'iôme',
+    'ome',
+    '-a',
+    '-b',
+    'iul',
+    'it',
+    'is',
+    'ose',
+    'octère',
+    'atase'
+  ])
+
+  return base + intermediate + suffix
+}
+
 export default {
   seed, reset, random, randomFloat, randomInt, randomOf
 }

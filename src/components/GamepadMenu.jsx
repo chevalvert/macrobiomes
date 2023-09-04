@@ -5,13 +5,15 @@ import { clamp } from 'missing-math'
 import classnames from 'classnames'
 import noop from 'utils/noop'
 
+import Prng from 'controllers/Prng'
+
 export default class Button extends Component {
   beforeRender (props) {
     this.update = this.update.bind(this)
     this.handleValueChange = this.handleValueChange.bind(this)
 
     this.state = {
-      value: props['store-value'] || writable([0, 0]),
+      value: props['store-value'] || writable(new Array(props.entries.length).fill(0)),
       selectedEntryIndex: writable(0)
     }
   }
@@ -27,10 +29,10 @@ export default class Button extends Component {
     this.state.value.subscribe(this.handleValueChange)
     this.handleValueChange()
 
-    Gamepad.on('up', () => this.state.selectedEntryIndex.update(i => clamp(--i, 0, this.refs.entries.length - 1)))
-    Gamepad.on('down', () => this.state.selectedEntryIndex.update(i => clamp(++i, 0, this.refs.entries.length - 1)))
-    Gamepad.on('right', this.handleSubEntryChange(-1))
-    Gamepad.on('left', this.handleSubEntryChange(+1))
+    Gamepad.on('up', () => this.state.selectedEntryIndex.update(i => clamp(--i, 0, this.props.entries.length - 1)))
+    Gamepad.on('down', () => this.state.selectedEntryIndex.update(i => clamp(++i, 0, this.props.entries.length - 1)))
+    Gamepad.on('left', this.handleSubEntryChange(-1))
+    Gamepad.on('right', this.handleSubEntryChange(+1))
   }
 
   clear () {
@@ -40,39 +42,54 @@ export default class Button extends Component {
 
   update () {
     this.clear()
+
     this.render((
-      this.props.entries.map((entries, i) => (
+      this.props.entries.map(({ values, label }, i) => (
         <ul
-          refArray={this.refArray('entries')}
+          data-label={label}
+          ref={this.refArray('entries')}
           class={classnames('gamepad-menu__entry', { 'is-selected': i === this.state.selectedEntryIndex.current })}
         >
-          {(i > 0 ? entries[this.state.value.current[0]] : entries).map((subentry, j) => (
+          {values.map(({ label }, j) => (
             <li
-              class={classnames('gamepad-menu__subentry', { 'is-selected': j === this.state.value.current[i] })}
-            >
-              {subentry}
-            </li>
+              class={classnames('gamepad-menu__value', { 'is-selected': j === this.state.value.current[i] })}
+              innerHTML={label}
+            />
           ))}
         </ul>
       ))
     ), this.base)
   }
 
+  randomize () {
+    this.log(this.state.value.current)
+    this.state.value.update(value => this.props.entries.map(entry => (
+      Prng.randomInt(0, entry.values.length)
+    )), true)
+  }
+
   handleValueChange () {
-    ;(this.props['event-change'] || noop)(this.props.entries.map((subentries, i) => {
-      return subentries[this.state.value.current[i]]
-    }))
+    const props = {}
+    for (let i = 0; i < this.props.entries.length; i++) {
+      const entry = this.props.entries[i]
+      const p = entry.values[this.state.value.current[i]].props
+      for (const key in p) {
+        const v = p[key]
+        props[key] = Array.isArray(v) ? Prng.randomOf(v) : v
+      }
+    }
+    ;(this.props['event-change'] || noop)(props)
   }
 
   handleSubEntryChange (direction = 0) {
     return () => {
       const index = this.state.selectedEntryIndex.get()
       this.state.value.update(value => {
-        // WARNING: hardcoded value
+        const len = this.props.entries[index].values.length
         const offset = direction > 0
           ? direction
-          : direction + 3
-        value[index] = (value[index] + offset) % 3
+          : direction + len
+        value[index] = (value[index] + offset) % len
         return value
       }, true)
     }

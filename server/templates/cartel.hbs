@@ -19,7 +19,7 @@
   <link rel='stylesheet' href='/bundle.css'>
   {{/if}}
 </head>
-<body data-template='remote' data-env='{{ env.name }}'>
+<body data-template='cartel' data-env='{{ env.name }}'>
   <noscript>JavaScript doit être activé pour pouvoir utiliser cette application.</noscript>
   <script type='text/javascript'>
     window.UID = '{{uid}}'
@@ -27,6 +27,6 @@
     window.PKG = {{{json pkg}}}
     window.ENV = {{{json env}}}
   </script>
-  <script src='/remote.js'></script>
+  <script src='/cartel.js'></script>
 </body>
 </html>

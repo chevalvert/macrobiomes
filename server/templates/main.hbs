@@ -7,7 +7,7 @@
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui' />
   <meta name='theme-color' content='{{app.theme}}' />
 
-  <title>{{app.title}} | {{pkg.version}}{{#unless isProduction}} | {{env}}{{/unless}}</title>
+  <title>{{app.title}} | {{pkg.version}}{{#unless env.isProduction}} | {{env.name}}{{/unless}}</title>
 
   <style type='text/css'>
     {{#if app.scene.invert}}
@@ -19,14 +19,17 @@
     }
   </style>
 
-  {{#if isProduction}}
+  {{#if env.isProduction}}
   <link rel='stylesheet' href='/bundle.css'>
   {{/if}}
 </head>
-<body data-template='main' data-env='{{ env }}'>
+<body data-template='main' data-env='{{ env.name }}'>
   <noscript>JavaScript doit être activé pour pouvoir utiliser cette application.</noscript>
   <script type='text/javascript'>
-    window.ENV = Object.assign({{{json app}}}, { id: '{{id}}', env: '{{env}}' })
+    window.UID = '{{uid}}'
+    window.APP = {{{json app}}}
+    window.PKG = {{{json pkg}}}
+    window.ENV = {{{json env}}}
   </script>
   <script src='/main.js'></script>
 </body>

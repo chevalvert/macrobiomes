@@ -1,17 +1,20 @@
+/* global APP */
+
 import Store from 'store'
 import { wrap, randomInt } from 'missing-math'
 import Polygon from 'abstractions/Polygon'
-import stringToColor from 'utils/string-to-color'
-import { randomOf } from 'controllers/Prng'
+import { randomOf, randomName } from 'controllers/Prng'
 
 export default class Creature {
-  get renderer () { return Store.renderer.instance ? Store.renderer.instance.current : null }
+  set renderer (renderer) { this.__renderer = renderer }
+  get renderer () { return this.__renderer ?? (Store.renderer.instance ? Store.renderer.instance.current : null) }
 
   constructor ({
+    uid = randomName(),
     pattern = {},
     animated = false,
     speed = randomInt(1, 4),
-    shape = 'rectangle',
+    shape = 'blob',
     size = 10,
     sprite = null,
     bounds = [0, 0, window.innerWidth, window.innerHeight],
@@ -23,6 +26,7 @@ export default class Creature {
       ? this.renderer.getContext('trace').canvas.resolution
       : 1
   } = {}) {
+    this.uid = uid
     this.speed = speed
     this.timestamp = Date.now()
     this.animated = animated
@@ -42,13 +46,11 @@ export default class Creature {
       this.sprite = Polygon.tamagotchize(polygon, {
         resolution,
         direction: randomOf(['horizontal', 'vertical']),
-        slicesLength: randomOf([2, 3, 4]),
+        slicesLength: randomOf([2, 3, 4, 5, 6]),
         framesLength: 10,
         amt: 0.1
       })
     }
-
-    this.debugColor = stringToColor(this.constructor.name)
   }
 
   get path () {
@@ -87,18 +89,25 @@ export default class Creature {
     ) - this.radius
   }
 
-  render ({ showStroke = this.SHOW_STROKE } = {}) {
-    if (!showStroke) return
-    this.renderer.debug(this.center, {
+  render ({ showStroke = this.SHOW_STROKE, showName = this.SHOW_NAME } = {}) {
+    showName && this.renderer.draw('text', this.renderer.shape({
+      position: this.position,
+      text: this.uid.toLowerCase(),
+      dimensions: [this.size, this.size]
+    }))
+
+    showStroke && this.renderer.draw('contours', this.renderer.shape({
+      position: this.center,
       strokeStyle: this.color,
       path: this.path,
-      lineWidth: 3,
+      lineWidth: APP.renderer.scale,
       dimensions: [this.size, this.size]
-    })
+    }))
   }
 
   toJSON () {
     return {
+      uid: this.uid,
       type: this.constructor.name,
       speed: this.speed,
       size: this.size,

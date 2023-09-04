@@ -8,7 +8,8 @@ const isProduction = (process.env.NODE_ENV === 'production')
 module.exports = {
   entry: {
     main: [path.join(__dirname, 'src', 'templates', 'main.jsx'), path.join(__dirname, 'src', 'index.scss')],
-    remote: [path.join(__dirname, 'src', 'templates', 'remote.jsx'), path.join(__dirname, 'src', 'index.scss')]
+    remote: [path.join(__dirname, 'src', 'templates', 'remote.jsx'), path.join(__dirname, 'src', 'index.scss')],
+    cartel: [path.join(__dirname, 'src', 'templates', 'cartel.jsx'), path.join(__dirname, 'src', 'index.scss')]
   },
 
   output: {

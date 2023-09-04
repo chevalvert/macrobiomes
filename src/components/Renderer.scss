@@ -1,9 +1,12 @@
 .renderer {
-  overflow: hidden;
   position: relative;
 
+  outline: var(--padding, 0) solid var(--background);
+  outline-offset: calc(-1 * var(--padding, 0));
+
   canvas {
-    @include inset;
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
 
