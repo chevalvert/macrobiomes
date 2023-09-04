@@ -24,8 +24,26 @@
 .remote {
   @include no-select;
 
+  --one-pixel: 2px;
+
+  --font-size-small: 1.5vmax;
+  --font-size-large: 4vmax;
+  --padding: 9vmax;
+
+  --grid-height: 30vmax;
+  --grid-color: rgb(76, 76, 76);
+  --grid-steps-x: 30;
+  --grid-steps-y: 16;
+
+  --menu-gap: 3vmax;
+
+  --button-padding: 2vmax;
+  --button-icon-size: 2vmax;
+  --button-y: 13.5vmax;
+  --button-gap: 21vmax;
+
   font-family: 'Styrene';
-  font-size: 4.2rem;
+  font-size: var(--font-size-large);
   line-height: 1.4;
   color: white;
 
@@ -34,46 +52,47 @@
   display: flex;
   flex-direction: column;
 
+  & > * {
+  }
+
   h1 {
     font-weight: normal;
-    font-size: 5rem;
-    padding: 5rem;
+    font-size: var(--font-size-large);
+    padding: calc(var(--padding) * 0.66) var(--padding);
     text-transform: capitalize;
   }
 
   &__renderer {
-    --steps-x: 30;
-    --steps-y: 10;
-    --grid-color: rgba(255, 255, 255, 0.3);
-
     position: relative;
     display: flex;
     justify-content: center;
+    align-items: center;
     overflow: hidden;
 
-    outline: 1px solid var(--grid-color);
+    min-height: var(--grid-height);
+    outline: var(--one-pixel) solid var(--grid-color);
 
     &::before {
       @include inset(-1px);
       content: '';
 
-      border-right: 1px solid var(--grid-color);
-      border-bottom: 1px solid var(--grid-color);
+      border-right: var(--one-pixel) solid var(--grid-color);
+      border-bottom: var(--one-pixel) solid var(--grid-color);
 
       background:
         repeating-linear-gradient(
           90deg,
           var(--grid-color),
-          var(--grid-color) 1px,
-          transparent 1px,
-          transparent calc(100% / var(--steps-x))
+          var(--grid-color) var(--one-pixel),
+          transparent var(--one-pixel),
+          transparent calc(100% / var(--grid-steps-x))
         ),
         repeating-linear-gradient(
           180deg,
           var(--grid-color),
-          var(--grid-color) 1px,
-          transparent 1px,
-          transparent calc(100% / var(--steps-y))
+          var(--grid-color) var(--one-pixel),
+          transparent var(--one-pixel),
+          transparent calc(100% / var(--grid-steps-y))
         ),
       ;
     }
@@ -88,25 +107,32 @@
   }
 
   .gamepad-menu {
-    padding: 15rem 5rem;
-    flex: 1;
+    --font-size-label: var(--font-size-small);
+    padding: var(--padding);
+    gap: var(--menu-gap);
   }
 
   .button {
     --color: white;
     --border-color: white;
     --background: black;
-    padding: 2.0rem;
+    padding: var(--button-padding);
     overflow: hidden;
+    border-width: var(--one-pixel);
     border-radius: 0;
     border-right: 0;
+
+    .button__icon svg {
+      height: var(--button-icon-size);
+      width: var(--button-icon-size);
+    }
 
   }
 
   .button--random {
     position: fixed;
     right: 0;
-    top: 15rem;
+    top: var(--button-y);
 
     .button__icon {
       animation: button--random 500ms;
@@ -116,7 +142,7 @@
   .button--send {
     position: fixed;
     right: 0;
-    top: 40rem;
+    top: calc(var(--button-y) + var(--button-gap));
 
     .button__icon {
       animation:

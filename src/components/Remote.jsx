@@ -33,8 +33,8 @@ export default class Remote extends Component {
         <h1 store-text={state.creatureName} />
         <div class='remote__renderer'>
           <Renderer
-            width={400}
-            height={400}
+            width={600}
+            height={600}
             ref={this.ref('renderer')}
           />
         </div>
@@ -77,7 +77,16 @@ export default class Remote extends Component {
       (this.refs.renderer.props.height - creature.size) / 2
     ]
 
+    this.refs.renderer.forEachLayer((canvas, context) => {
+      const SCALE = 3
+      context.save()
+      context.translate((canvas.width * canvas.resolution) / 2, (canvas.height * canvas.resolution) / 2)
+      context.scale(SCALE, SCALE)
+      context.translate(-(canvas.width * canvas.resolution) / 2, -(canvas.height * canvas.resolution) / 2)
+    })
+
     creature.render({ showStroke: true, trace: 'creatures' })
+    this.refs.renderer.forEachLayer((canvas, context) => context.restore())
   }
 
   async handleSend () {

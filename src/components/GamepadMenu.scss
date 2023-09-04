@@ -1,4 +1,5 @@
 .gamepad-menu {
+  --font-size-label: 1.2rem;
   color: white;
 
   display: flex;
@@ -10,7 +11,7 @@
   }
 
   &__entry[data-label]::before {
-    font-size: 1.2rem;
+    font-size: var(--font-size-label);
     content: attr(data-label);
   }
 

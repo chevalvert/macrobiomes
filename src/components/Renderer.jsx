@@ -46,7 +46,7 @@ export default class Renderer extends Component {
     this.base.style.width = this.props.width + 'px'
     this.base.style.height = this.props.height + 'px'
 
-    this.#forEachLayers((canvas, context, { name, resolution, roundTo, style = {} }) => {
+    this.forEachLayer((canvas, context, { name, resolution, roundTo, style = {} }) => {
       canvas.width = this.props.width * resolution
       canvas.height = this.props.height * resolution
       canvas.style.width = this.props.width + 'px'
@@ -77,7 +77,7 @@ export default class Renderer extends Component {
   }
 
   clear ({ force = false } = {}) {
-    this.#forEachLayers((canvas, context, { name, clear }) => {
+    this.forEachLayer((canvas, context, { name, clear }) => {
       if (!force && !clear) return
       context.clearRect(0, 0, canvas.width * canvas.resolution, canvas.height * canvas.resolution)
     })
@@ -168,7 +168,7 @@ export default class Renderer extends Component {
     return this.state.noiseMap[noise + '2'](i / res, j / res)
   }
 
-  #forEachLayers (callback = noop) {
+  forEachLayer (callback = noop) {
     const layers = Store.renderer.layers.get()
     for (const name in layers) {
       const canvas = this.refs.canvas.get(name)
