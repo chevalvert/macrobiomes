@@ -24,6 +24,7 @@ module.exports = template => (req, res, next) => {
       uid: req.params.uid || 0,
       env: {
         name: process.env.NODE_ENV,
+        count: process.env.COUNT,
         isProduction: process.env.NODE_ENV === 'production'
       }
     })

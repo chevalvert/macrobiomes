@@ -1,3 +1,4 @@
+server/count.txt
 build/*
 .env
 server/app*.json

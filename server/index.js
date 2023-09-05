@@ -1,8 +1,13 @@
 #!/usr/bin/env node
 
+const fs = require('fs-extra')
 const path = require('path')
 const pkg = require('../package.json')
 require('dotenv').config({ path: path.resolve(__dirname, '.env') })
+
+process.env.COUNTER = path.resolve(__dirname, process.env.COUNTER || 'counter.txt')
+fs.ensureFileSync(process.env.COUNTER)
+process.env.COUNT = parseInt(fs.readFileSync(process.env.COUNTER, 'utf8') || 0)
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'production'
 process.env.CONFIGURATION = path.join(__dirname, process.env.CONFIGURATION)
@@ -76,6 +81,12 @@ app.use('/api/ping', (req, res) => res.status(200).json({ version: pkg.version }
 app.use(['/cartel/:uid', '/cartel'], render('cartel.hbs'))
 app.use(['/remote/:uid', '/remote'], render('remote.hbs'))
 app.use(['/:uid', '/'], render('main.hbs'))
+
+// WIP
+Websocket.on('creature', data => {
+  process.env.COUNT++
+  fs.writeFile(process.env.COUNTER, process.env.COUNT, 'utf8')
+})
 
 // Log errors
 app.use((error, req, res, next) => {

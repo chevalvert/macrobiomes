@@ -1,4 +1,4 @@
-/* global APP */
+/* global APP, ENV */
 import Store from 'store'
 import { Component } from 'utils/jsx'
 import { writable } from 'utils/state'
@@ -14,7 +14,8 @@ export default class Cartel extends Component {
     this.handleCreature = this.handleCreature.bind(this)
 
     this.state = {
-      creatures: writable([])
+      creatures: writable([]),
+      count: writable(ENV.count || 0)
     }
   }
 
@@ -26,6 +27,8 @@ export default class Cartel extends Component {
         <header>
           <h1>{APP.title}</h1>
           <h2>studio chevalvert, 2023</h2>
+          {/* TODO layout */}
+          <h3 store-text={state.count} />
         </header>
 
         <div class='cartel__text'>
@@ -57,6 +60,8 @@ export default class Cartel extends Component {
   }
 
   handleCreature ({ from, creature } = {}) {
+    this.state.count.update(count => ++count)
+
     this.state.creatures.update(creatures => {
       if (creatures.length > this.refs.renderers.length - 1) creatures.shift()
       creatures.push(Population.create(creature))
