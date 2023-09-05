@@ -8,6 +8,7 @@ let sounds = []
 let sound = null
 
 export function random () {
+  stop()
   sound = Prng.randomOf(sounds)
 }
 

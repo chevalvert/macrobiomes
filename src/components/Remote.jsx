@@ -63,6 +63,7 @@ export default class Remote extends Component {
 
   handleGamepadMenu (value) {
     this.state.value.set(value)
+    // TODO only update creature speed when only speed has changed
     this.state.creature.set(Population.create(value))
   }
 
