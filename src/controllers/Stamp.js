@@ -60,7 +60,7 @@ async function stamp () {
   renderer.draw('trace', ctx => {
     // Left
     ctx.save()
-    ctx.translate(img.height / 2 + 20, window.innerHeight / 2)
+    ctx.translate(img.height / 2 + 200, window.innerHeight / 2)
     ctx.rotate(-Math.PI / 2)
     ctx.translate(-img.width / 2, -img.height / 2)
     ctx.drawImage(img, 0, 0)
@@ -68,7 +68,7 @@ async function stamp () {
 
     // Right
     ctx.save()
-    ctx.translate(window.innerWidth - img.height / 2 + 20, window.innerHeight / 2)
+    ctx.translate(window.innerWidth - img.height / 2 - 200, window.innerHeight / 2)
     ctx.rotate(Math.PI / 2)
     ctx.translate(-img.width / 2, -img.height / 2)
     ctx.drawImage(img, 0, 0)

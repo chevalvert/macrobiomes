@@ -143,7 +143,7 @@ export default class Renderer extends Component {
 
       if (text) {
         const padding = 5
-        const fontSize = 12
+        const fontSize = 14
         ctx.font = `${fontSize}px Styrene`
 
         const width = this.#measureText(text)
