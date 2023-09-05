@@ -90,11 +90,18 @@ export default class Creature {
   }
 
   render ({ showStroke = this.SHOW_STROKE, showName = this.SHOW_NAME } = {}) {
-    showName && this.renderer.draw('text', this.renderer.shape({
-      position: this.position,
-      text: this.uid.toLowerCase(),
-      dimensions: [this.size, this.size]
-    }))
+    showName && this.renderer.draw('text', ctx => {
+      ctx.save()
+      ctx.translate(this.position[0] + this.size / 2, this.position[1] + this.size / 2)
+      // Random orientation of the text
+      ctx.rotate([1, 2, 3, 4][Math.round(Math.sin(this.timestamp) * 3)] * Math.PI / 2)
+      this.renderer.shape({
+        position: [-this.size / 2, -this.size / 2],
+        text: this.uid.toLowerCase(),
+        dimensions: [this.size, this.size]
+      })(ctx)
+      ctx.restore()
+    })
 
     showStroke && this.renderer.draw('contours', this.renderer.shape({
       position: this.center,
