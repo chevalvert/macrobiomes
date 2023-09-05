@@ -54,7 +54,7 @@ export default class Creature {
   }
 
   get path () {
-    const index = Math.round((Store.raf.frameCount.current + this.seed) / 5) % this.sprite.length
+    const index = Math.round((Store.raf.frameCount.current + this.seed) * (this.speed * 0.2)) % this.sprite.length
     return this.sprite[index]
   }
 
