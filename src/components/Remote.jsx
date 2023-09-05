@@ -57,7 +57,7 @@ export default class Remote extends Component {
   }
 
   handleRandom () {
-    this.handleGamepadMenu(this.state.value.get())
+    this.refs.gamepadMenu.handleValueChange()
     this.refs.buttonRandom.animate()
   }
 

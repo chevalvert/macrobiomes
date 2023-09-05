@@ -61,13 +61,6 @@ export default class Button extends Component {
     ), this.base)
   }
 
-  randomize () {
-    this.log(this.state.value.current)
-    this.state.value.update(value => this.props.entries.map(entry => (
-      Prng.randomInt(0, entry.values.length)
-    )), true)
-  }
-
   handleValueChange () {
     const props = {}
     for (let i = 0; i < this.props.entries.length; i++) {
