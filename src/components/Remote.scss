@@ -132,7 +132,7 @@
   .button--random {
     position: fixed;
     right: 0;
-    top: var(--button-y);
+    top: calc(var(--button-y) + var(--button-gap));
 
     .button__icon {
       animation: button--random 500ms;
@@ -142,7 +142,7 @@
   .button--send {
     position: fixed;
     right: 0;
-    top: calc(var(--button-y) + var(--button-gap));
+    top: var(--button-y);
 
     .button__icon {
       animation:
