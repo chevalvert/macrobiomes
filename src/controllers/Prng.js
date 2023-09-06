@@ -34,6 +34,13 @@ export function randomName () {
     'mat',
     'sebil',
     'loulou',
+    'sasa',
+    'jul',
+    'juul',
+    'flo',
+    'keke',
+    'nico',
+    'juju',
     'bobo',
     'bibi',
     'baba',
@@ -48,7 +55,6 @@ export function randomName () {
     'momo',
     'mimi',
     'chichi',
-    'juju',
     'jojo'
   ])
 
