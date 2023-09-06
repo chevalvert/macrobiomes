@@ -7,7 +7,7 @@ import WebSocketServer from 'controllers/WebSocketServer'
 let timer
 let isRunning = false
 
-WebSocketServer.content.subscribe(reset)
+// WebSocketServer.content.subscribe(reset)
 
 function tick () {
   if (!APP.gamepad.ghost) return
