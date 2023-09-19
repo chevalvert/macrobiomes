@@ -80,9 +80,10 @@ app.use('/api/ping', (req, res) => res.status(200).json({ version: pkg.version }
 // Setup front routes
 app.use(['/cartel/:uid', '/cartel'], render('cartel.hbs'))
 app.use(['/remote/:uid', '/remote'], render('remote.hbs'))
+app.use(['/draw'], render('draw.hbs'))
+app.use(['/fill'], render('fill.hbs'))
 app.use(['/:uid', '/'], render('main.hbs'))
 
-// WIP
 Websocket.on('creature', data => {
   process.env.COUNT++
   fs.writeFile(process.env.COUNTER, process.env.COUNT, 'utf8')

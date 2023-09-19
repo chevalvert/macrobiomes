@@ -9,7 +9,9 @@ module.exports = {
   entry: {
     main: [path.join(__dirname, 'src', 'templates', 'main.jsx'), path.join(__dirname, 'src', 'index.scss')],
     remote: [path.join(__dirname, 'src', 'templates', 'remote.jsx'), path.join(__dirname, 'src', 'index.scss')],
-    cartel: [path.join(__dirname, 'src', 'templates', 'cartel.jsx'), path.join(__dirname, 'src', 'index.scss')]
+    cartel: [path.join(__dirname, 'src', 'templates', 'cartel.jsx'), path.join(__dirname, 'src', 'index.scss')],
+    draw: [path.join(__dirname, 'src', 'templates', 'draw.jsx'), path.join(__dirname, 'src', 'index.scss')],
+    fill: [path.join(__dirname, 'src', 'templates', 'fill.jsx'), path.join(__dirname, 'src', 'index.scss')]
   },
 
   output: {

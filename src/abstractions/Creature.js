@@ -42,7 +42,9 @@ export default class Creature {
     if (sprite) {
       this.sprite = sprite.map(polygon => Polygon.toPath2d(polygon, resolution))
     } else {
-      const polygon = Polygon.shape(shape, { size: this.size, resolution })
+      const polygon = Array.isArray(shape)
+        ? shape
+        : Polygon.shape(shape, { size: this.size, resolution })
       this.sprite = Polygon.tamagotchize(polygon, {
         resolution,
         direction: randomOf(['horizontal', 'vertical']),
