@@ -106,11 +106,13 @@ export function tamagotchize (polygon, {
       }
 
       const slice = polybool(polygon, rect, 'and')
-      const translated = slice[0].map(p => ([p[0] + offset[0], p[1] + offset[1]]))
-      slices.push(translated)
+      if (slice[0]) {
+        const translated = slice[0].map(p => ([p[0] + offset[0], p[1] + offset[1]]))
+        slices.push(translated)
+      }
     }
 
-    frames.push(union(slices))
+    frames.push(slices.length ? union(slices) : polygon)
   }
 
   return frames.map(frame => toPath2d(frame, resolution))
