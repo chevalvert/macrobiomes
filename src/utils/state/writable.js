@@ -14,6 +14,10 @@ class Writable extends Readable {
     }
   }
 
+  toggle () {
+    this.set(!this.current)
+  }
+
   update (cb, force) {
     const value = cb(this.current)
     this.set(value !== undefined ? value : this.current, force)

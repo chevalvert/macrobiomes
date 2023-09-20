@@ -31,6 +31,7 @@ export default class Renderer extends Component {
         id='Renderer'
         class='renderer'
         style={`--padding: ${props.padding ?? 0}px`}
+        event-click={props['event-click']}
       >
         {Object.entries(Store.renderer.layers.current).map(([name]) => (
           <canvas

@@ -91,7 +91,11 @@ export default class Creature {
     ) - this.radius
   }
 
-  render ({ showStroke = this.SHOW_STROKE, showName = this.SHOW_NAME } = {}) {
+  render ({
+    showStroke = this.SHOW_STROKE,
+    lineWidth = APP.renderer.scale,
+    showName = this.SHOW_NAME
+  } = {}) {
     showName && this.renderer.draw('text', ctx => {
       ctx.save()
       ctx.translate(this.position[0] + this.size / 2, this.position[1] + this.size / 2)
@@ -109,7 +113,7 @@ export default class Creature {
       position: this.center,
       strokeStyle: this.color,
       path: this.path,
-      lineWidth: APP.renderer.scale,
+      lineWidth,
       dimensions: [this.size, this.size]
     }))
   }
