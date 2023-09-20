@@ -14,7 +14,11 @@ export default class Builder extends Creature {
     this.pattern = new Pattern(
       this.renderer.getContext('trace'),
       this.pattern.string || randomOf(APP.scene.patterns),
-      this.pattern.colors || randomOf(APP.scene.palettes)
+      this.pattern.colors || randomOf(APP.scene.palettes),
+      {
+        wrapAfter: this.pattern.wrapAfter || undefined,
+        buildMode: this.pattern.buildMode || undefined
+      }
     )
   }
 

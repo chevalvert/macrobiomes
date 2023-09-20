@@ -1,7 +1,5 @@
 /* global APP */
 
-// TODO creature builder for workshops
-
 import Store from 'store'
 import { render } from 'utils/jsx'
 import { writable } from 'utils/state'

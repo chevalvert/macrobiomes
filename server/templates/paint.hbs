@@ -19,7 +19,7 @@
   <link rel='stylesheet' href='/bundle.css'>
   {{/if}}
 </head>
-<body data-template='fill' data-env='{{ env.name }}'>
+<body data-template='paint' data-env='{{ env.name }}'>
   <noscript>JavaScript doit être activé pour pouvoir utiliser cette application.</noscript>
   <script type='text/javascript'>
     window.UID = '{{uid}}'
@@ -27,6 +27,6 @@
     window.PKG = {{{json pkg}}}
     window.ENV = {{{json env}}}
   </script>
-  <script src='/fill.js'></script>
+  <script src='/paint.js'></script>
 </body>
 </html>

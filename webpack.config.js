@@ -11,7 +11,7 @@ module.exports = {
     remote: [path.join(__dirname, 'src', 'templates', 'remote.jsx'), path.join(__dirname, 'src', 'index.scss')],
     cartel: [path.join(__dirname, 'src', 'templates', 'cartel.jsx'), path.join(__dirname, 'src', 'index.scss')],
     draw: [path.join(__dirname, 'src', 'templates', 'draw.jsx'), path.join(__dirname, 'src', 'index.scss')],
-    fill: [path.join(__dirname, 'src', 'templates', 'fill.jsx'), path.join(__dirname, 'src', 'index.scss')]
+    paint: [path.join(__dirname, 'src', 'templates', 'paint.jsx'), path.join(__dirname, 'src', 'index.scss')]
   },
 
   output: {
