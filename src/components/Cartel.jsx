@@ -53,7 +53,10 @@ export default class Cartel extends Component {
         </section>
 
         <div class='cartel__count'><span store-text={state.count} /> créatures générées depuis le lancement de l’expérience</div>
-        <img src='https://github.com/chevalvert.png' />
+        <div class='cartel__sponsors'>
+          <img src='/logos/arche.svg' style='--s: 1; --y: 0.08' />
+          <img src='/logos/chevalvert.png' style='--s: 0.8' />
+        </div>
       </main>
     )
   }

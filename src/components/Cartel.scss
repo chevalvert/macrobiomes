@@ -100,12 +100,20 @@
     }
   }
 
-  img {
+  &__sponsors {
     position: fixed;
     top: 4.4vmax;
     right: var(--padding);
-    height: 3vmax;
-    width: auto;
+
+    display: flex;
+    gap: calc(var(--padding) / 2);
+    align-items: center;
+
+    img {
+      transform: translateY(calc(var(--y, 0) * 100%));
+      height: calc(3vmax * var(--s, 1));
+      width: auto;
+    }
   }
 
   &__count {
