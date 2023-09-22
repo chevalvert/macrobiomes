@@ -21,7 +21,7 @@ export default class Cartel extends Component {
 
   template (props, state) {
     const size = 160
-    const len = 6 * 4
+    const len = 5 * 5
     return (
       <main id='Cartel' class='cartel'>
         <header>
